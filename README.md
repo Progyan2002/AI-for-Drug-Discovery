@@ -5,11 +5,17 @@ This Quantitative Structure-Activity Relationship (QSAR) model is designed to pr
 Key Features 
 
 Data Preprocessing: The model processes bioactivity data from a dataset (PPARg_bioactivity_data_nM.csv) containing 1,247 compounds with canonical SMILES and standard value (IC50) measurements. Invalid SMILES are filtered, duplicates are removed, and IC50 values are converted to pEC50 (-log10[IC50 in M]) for regression analysis.
+
 Feature Generation: Molecular descriptors are generated using Morgan fingerprints (radius=2, 2048 bits) via RDKit, capturing structural and physicochemical properties of compounds to enable robust predictive modeling.
+
 Machine Learning Model: An XGBoost regressor is employed with optimized hyperparameters (n_estimators=200, max_depth=5, learning_rate=0.1, subsample=0.8, colsample_bytree=0.8) to predict pEC50 values, balancing model complexity and generalization.
+
 Model Performance: Evaluated on a 20% test set, the model achieves a training R² of 0.9029 (MSE: 0.1375) and a test R² of 0.5663 (MSE: 0.5705, MAE: 0.5532), indicating strong predictive capability with moderate generalization to unseen data.
+
 Visualization and Diagnostics: The model includes scatter plots of predicted vs. actual pEC50 values and residual plots to assess prediction accuracy and model fit, saved as pec50_prediction_plot_xgboost.png and residuals_plot_xgboost.png.
+
 Prediction Pipeline: The model supports predictions for new compounds by generating Morgan fingerprints from SMILES strings and outputting pEC50 and corresponding EC50 (nM) values. Example predictions for two compounds yielded EC50 values of 89.8576 nM and 25.2321 nM, demonstrating practical applicability.
+
 Model and Data Storage: The trained model is saved as pparg_drug_discovery_model.pkl, and processed data is stored as processed_pparg_data.csv for reproducibility and future use.
 
 Workflow
